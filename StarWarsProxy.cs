@@ -18,12 +18,10 @@ namespace CoreConsoleExample {
 
         public async Task<List<Film>> LoadFilms() {
 
-            //var data = await client.GetStringAsync("https://swapi.co/api/films");
-            //Console.WriteLine(data);
-
             var stream = client.GetStreamAsync("https://swapi.co/api/films");
-
             var serializer = new DataContractJsonSerializer(typeof(Result<Film>));
+
+            //Deserialize response data.
             var response = serializer.ReadObject(await stream) as Result<Film>;
             return response.Results;
 
